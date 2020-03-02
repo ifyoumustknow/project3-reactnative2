@@ -22,8 +22,10 @@ const GameArea = () => {
           style={styles.center_bird}
           source={require('./assets/images/bird1.png')}
         />
-        <View style={styles.bird_hole} />
+        <View style={styles.bird_spot} />
       </View>
+      <View style={styles.stroke_bottom} />
+      <View style={styles.stroke_top} />
       <View style={styles.team_container_bottom} />
       <Text style={styles.team_container_text_bot}>ABC</Text>
     </View>
@@ -36,6 +38,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#A83131',
     borderBottomRightRadius: 30,
     borderBottomLeftRadius: 30,
+    overflow: 'hidden',
   },
 
   header_container: {
@@ -57,9 +60,8 @@ const styles = StyleSheet.create({
   bird_cage: {
     position: 'relative',
     zIndex: 2,
-    height: 670,
+    height: 680,
     justifyContent: 'center',
-    top: 9,
     overflow: 'hidden',
   },
 
@@ -67,24 +69,18 @@ const styles = StyleSheet.create({
     position: 'relative',
     alignSelf: 'center',
     zIndex: 2,
-    top:50,
+    left: 1,
+    top: 50,
     overflow: 'hidden',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 7,
-    },
-    shadowOpacity: 0.41,
-    shadowRadius: 9.11,
-    elevation: 14,
   },
 
-  bird_hole:{
+  bird_spot: {
     position: 'relative',
-    bottom:800,
+    bottom: 835,
     alignSelf: 'center',
-    width: 150,
-    height: 150,
+    width: 100,
+    height: 100,
+    right: 1,
     borderWidth: 8,
     borderRadius: 100,
     paddingBottom: 10,
@@ -108,7 +104,7 @@ const styles = StyleSheet.create({
 
   timer_container: {
     position: 'relative',
-    right: 120,
+    right: 103,
     width: 65,
     height: 65,
     borderWidth: 8,
@@ -123,40 +119,12 @@ const styles = StyleSheet.create({
   timer: {
     position: 'relative',
     color: 'black',
-    fontSize: 30,
-    top: 13,
-    right: 170,
+    fontSize: 35,
+    top: 10,
+    right: 153,
     textAlign: 'center',
     zIndex: 8,
-  },
-
-  scores_right_container: {
-    position: 'relative',
-    height: 88,
-    width: 88,
-    backgroundColor: '#250A26',
-    zIndex: 1,
-    right: 144,
-    borderBottomLeftRadius: 80,
-    overflow: 'hidden',
-  },
-
-  score_right: {
-    position: 'relative',
-    color: 'white',
-    right: 73,
-    fontSize: 58,
-    zIndex: 5,
-  },
-
-  team_text_right: {
-    position: 'relative',
-    color: 'black',
-    paddingTop: 16,
-    right: 130,
-    fontSize: 20,
-    textAlign: 'center',
-    zIndex: 9999,
+    fontFamily: 'FiraSansExtraCondensed-Bold',
   },
 
   scores_left_container: {
@@ -172,26 +140,59 @@ const styles = StyleSheet.create({
   score_left: {
     position: 'relative',
     color: 'white',
-    right: 68,
+    right: 65,
     fontSize: 58,
     textAlign: 'center',
     zIndex: 5,
+    fontFamily: 'FiraSansExtraCondensed-Bold',
   },
 
   team_text_left: {
     position: 'relative',
     color: 'black',
     paddingTop: 16,
-    right: 10,
-    fontSize: 20,
+    right: 0,
+    fontSize: 23,
     textAlign: 'center',
     zIndex: 9999,
+    fontFamily: 'FiraSansExtraCondensed-Medium',
+  },
+
+  team_text_right: {
+    position: 'relative',
+    color: 'black',
+    paddingTop: 16,
+    right: 110,
+    fontSize: 23,
+    textAlign: 'center',
+    zIndex: 9999,
+    fontFamily: 'FiraSansExtraCondensed-Medium',
+  },
+
+  scores_right_container: {
+    position: 'relative',
+    height: 88,
+    width: 88,
+    backgroundColor: '#250A26',
+    zIndex: 1,
+    right: 103,
+    borderBottomLeftRadius: 80,
+    overflow: 'hidden',
+  },
+
+  score_right: {
+    position: 'relative',
+    color: 'white',
+    right:35,
+    fontSize: 58,
+    zIndex: 5,
+    fontFamily: 'FiraSansExtraCondensed-Bold',
   },
 
   team_container_top: {
     position: 'relative',
     top: 10,
-    right: 3,
+    left: 6,
     width: 100,
     height: 100,
     borderBottomRightRadius: 50,
@@ -202,24 +203,26 @@ const styles = StyleSheet.create({
 
   team_container_text: {
     position: 'relative',
-    top: 75,
-    right: 70,
-    fontSize: 18,
+    top: 70,
+    right: 57,
+    fontSize: 20,
     color: 'white',
     zIndex: 2,
+    fontFamily: 'FiraSansExtraCondensed-Bold',
   },
   team_container_text_bot: {
     position: 'relative',
-    bottom:200,
-    alignSelf:'center',
-    fontSize: 30,
+    bottom: 220,
+    alignSelf: 'center',
+    fontSize: 40,
     color: 'white',
     zIndex: 9,
+    fontFamily: 'FiraSansExtraCondensed-Bold',
   },
 
   team_container_bottom: {
     position: 'relative',
-    bottom: 0,
+    bottom: 20,
     left: 118,
     width: 180,
     height: 220,
@@ -227,6 +230,36 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 100,
     backgroundColor: '#250A26',
     zIndex: 4,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.8,
+    shadowRadius: 7.1,
+    elevation: 13,
+  },
+
+  stroke_bottom: {
+    position: 'relative',
+    borderColor: 'rgba(255, 255, 255, .5)',
+    borderStyle: 'dotted',
+    borderWidth: 3,
+    bottom: 95,
+    width: 250,
+    alignSelf: 'center',
+    zIndex: 1,
+  },
+
+  stroke_top: {
+    position: 'relative',
+    borderColor: 'rgba(255, 255, 255, .5)',
+    borderStyle: 'dotted',
+    borderWidth: 3,
+    bottom: 590,
+    width: 250,
+    alignSelf: 'center',
+    zIndex: 1,
   },
 });
 
