@@ -1,111 +1,36 @@
-import React, {Component} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Alert,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
-import Constants from './Constants';
-import {GameEngine} from 'react-native-game-engine';
-import Matter from 'matter-js';
-import Bird from './Bird';
-import Wall from './Wall';
-import Physics from './Physics';
+import React from 'react';
+import {View, Text, StyleSheet, Image} from 'react-native';
 
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.gameEngine = null;
-    this.entities = this.setupWorld();
-  }
-
-  setupWorld = () => {
-    let engine = Matter.Engine.create({enableSleeping: false});
-    let world = engine.world;
-    world.gravity.y = 0.0;
-
-
-    let bird = Matter.Bodies.rectangle(
-      Constants.MAX_WIDTH / 2,
-      Constants.MAX_HEIGHT / 2.6,
-      50,
-      50,
-    );
-    let floor = Matter.Bodies.rectangle(
-      Constants.MAX_WIDTH / 2,
-      Constants.MAX_HEIGHT - 25,
-      Constants.MAX_WIDTH,
-      450,
-      {isStatic: true},
-    );
-    let ceiling = Matter.Bodies.rectangle(
-      Constants.MAX_WIDTH / 2,
-      5,
-      Constants.MAX_WIDTH,
-      50,
-      {isStatic: true},
-    );
-
-    Matter.World.add(world, [bird, floor, ceiling]);
-
-    return {
-      physics: {engine: engine, world: world},
-      bird: {body: bird, size: [50, 50], color: 'red', renderer: Bird},
-      floor: {
-        body: floor,
-        size: [Constants.MAX_WIDTH, 50],
-        renderer: Wall,
-      },
-      ceiling: {
-        body: ceiling,
-        size: [Constants.MAX_WIDTH, 150],
-        renderer: Wall,
-      },
-    };
-  };
-
-  render() {
-    return (
-      <View style={styles.floor_container}>
-        <View style={styles.header_container}>
-          <View style={styles.scores_left_container} />
-          <Text style={styles.score_left}>2</Text>
-          <Text style={styles.team_text_left}>ABC</Text>
-          <View style={styles.team_container_top} />
-          <Text style={styles.team_container_text}>XYZ</Text>
-          <View style={styles.timer_container} />
-          <Text style={styles.timer}>90</Text>
-          <Text style={styles.team_text_right}>XYZ</Text>
-          <Text style={styles.score_right}>2</Text>
-          <View style={styles.scores_right_container} />
-          <View style={styles.score_background} />
-        </View>
-        <View style={styles.bird_cage}>
-          <GameEngine
-            ref={ref => {
-              this.gameEngine = ref;
-            }}
-            style={styles.gameContainer}
-            systems={[Physics]}
-            entities={this.entities}
-          />
-        </View>
+const GameArea = () => {
+  return (
+    <View style={styles.floor_container}>
+      <View style={styles.header_container}>
+        <View style={styles.scores_left_container} />
+        <Text style={styles.score_left}>2</Text>
+        <Text style={styles.team_text_left}>ABC</Text>
+        <View style={styles.team_container_top} />
+        <Text style={styles.team_container_text}>XYZ</Text>
+        <View style={styles.timer_container} />
+        <Text style={styles.timer}>90</Text>
+        <Text style={styles.team_text_right}>XYZ</Text>
+        <Text style={styles.score_right}>2</Text>
+        <View style={styles.scores_right_container} />
+        <View style={styles.score_background} />
+      </View>
+      <View style={styles.bird_cage}>
         <Image
           style={styles.center_bird}
           source={require('./assets/images/bird1.png')}
         />
-        <View style={styles.bird_spot} />
-        <View style={styles.stroke_bottom} />
-        <View style={styles.stroke_top} />
-        <View style={styles.team_container_bottom} />
-        <Text style={styles.team_container_text_bot}>ABC</Text>
-
       </View>
-    );
-  }
-}
+      <View style={styles.bird_spot} />
+      <View style={styles.stroke_top} />
+      <View style={styles.stroke_bottom} />
+      <View style={styles.team_container_bottom} />
+      <Text style={styles.team_container_text_bot}>ABC</Text>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   floor_container: {
@@ -134,7 +59,7 @@ const styles = StyleSheet.create({
 
   bird_cage: {
     position: 'relative',
-    zIndex: 5,
+    zIndex: 2,
     height: 680,
     justifyContent: 'center',
     overflow: 'hidden',
@@ -143,22 +68,22 @@ const styles = StyleSheet.create({
   center_bird: {
     position: 'relative',
     alignSelf: 'center',
-    zIndex: 1,
-    left:2,
-    bottom:1150,
+    zIndex: 155,
+    left: 1,
+    top: 0,
+    overflow: 'hidden',
   },
 
   bird_spot: {
     position: 'relative',
-    bottom: 1400,
+    bottom: 400,
     alignSelf: 'center',
     width: 100,
     height: 100,
     right: 1,
     borderWidth: 8,
     borderRadius: 100,
-    paddingBottom: 10,
-    zIndex: 2,
+    zIndex: 0,
     backgroundColor: 'white',
     borderColor: '#250A26',
   },
@@ -257,7 +182,7 @@ const styles = StyleSheet.create({
   score_right: {
     position: 'relative',
     color: 'white',
-    right: 35,
+    right:35,
     fontSize: 58,
     zIndex: 5,
     fontFamily: 'FiraSansExtraCondensed-Bold',
@@ -286,24 +211,24 @@ const styles = StyleSheet.create({
   },
   team_container_text_bot: {
     position: 'relative',
-    bottom: 1980,
+    bottom: 340,
     alignSelf: 'center',
     fontSize: 40,
     color: 'white',
-    zIndex: 19,
+    zIndex: 9,
     fontFamily: 'FiraSansExtraCondensed-Bold',
   },
 
   team_container_bottom: {
     position: 'relative',
-    bottom: 1780,
+    bottom: 140,
     left: 118,
     width: 180,
     height: 220,
     borderTopRightRadius: 100,
     borderTopLeftRadius: 100,
     backgroundColor: '#250A26',
-    zIndex: 10,
+    zIndex: 4,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -319,10 +244,10 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(255, 255, 255, .5)',
     borderStyle: 'dotted',
     borderWidth: 3,
-    bottom: 1850,
+    bottom: 220,
     width: 250,
     alignSelf: 'center',
-    zIndex: 0,
+    zIndex: 1,
   },
 
   stroke_top: {
@@ -330,9 +255,11 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(255, 255, 255, .5)',
     borderStyle: 'dotted',
     borderWidth: 3,
-    bottom: 2330,
+    bottom: 690,
     width: 250,
     alignSelf: 'center',
-    zIndex: 0,
+    zIndex: 1,
   },
 });
+
+export default GameArea;
