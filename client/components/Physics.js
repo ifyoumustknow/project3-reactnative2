@@ -1,4 +1,4 @@
-import Matter from 'matter-js';
+import Matter from '../node_modules/matter-js/build/matter';
 
 const Physics = (entities, {touches, time}) => {
   let engine = entities.physics.engine;
@@ -7,12 +7,11 @@ const Physics = (entities, {touches, time}) => {
   touches
     .filter(t => t.type === 'press')
     .forEach(t => {
-      Matter.Body.applyForce(bird, bird.position, {x: 0.0, y: 0.02});
-      engine.world.gravity.y = -1;
+      Matter.Body.applyForce(bird, bird.position, {x: 0.0, y: 0.27});
+      engine.world.gravity.y = -0.1;
     });
 
   Matter.Engine.update(engine, time.delta);
-
 
   return entities;
 };
