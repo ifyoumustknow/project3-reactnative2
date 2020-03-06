@@ -16,8 +16,14 @@ import Bird from './Bird';
 import Player from './Player';
 import Opponent from './Opponent';
 import Physics from './Physics';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+
+
+
 
 export default class App extends Component {
+
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -35,7 +41,7 @@ export default class App extends Component {
     this.entities = this.setupWorld();
     }
 
-
+   
   setupWorld = () => {
     let engine = Matter.Engine.create({enableSleeping: false});
     let world = engine.world;
@@ -44,24 +50,24 @@ export default class App extends Component {
 
     let bird = Matter.Bodies.rectangle(
       Constants.MAX_WIDTH / 2,
-      Constants.MAX_HEIGHT / 2.6,
+      Constants.MAX_HEIGHT / 2.8,
       Constants.BIRD_WIDTH,
       Constants.BIRD_HEIGHT,
     );
 
     let player = Matter.Bodies.rectangle(
       Constants.MAX_WIDTH / 2,
-      Constants.MAX_HEIGHT + 460,
+      Constants.MAX_HEIGHT + 400,
       Constants.MAX_WIDTH,
-      50,
+      10,
       {isStatic: true},
     );
 
     let opponent = Matter.Bodies.rectangle(
       Constants.MAX_WIDTH / 2,
-      Constants.MAX_HEIGHT - 1560,
+      Constants.MAX_HEIGHT - 1555,
       Constants.MAX_WIDTH,
-      50,
+      10,
       {isStatic: true},
     );
 
@@ -117,22 +123,19 @@ export default class App extends Component {
     });
   };
 
-  
+
   render() {
     return (
       <View style={styles.floor_container}>
-        <Text style={styles.score_left}>{this.state.player_score}</Text>
-        <Text style={styles.score_right}>{this.state.oppo_score}</Text>
-        <Text style={styles.timer}>90</Text>
-        <Text style={styles.team_text_left}>P1</Text>
-        <Text style={styles.team_text_right}>P2</Text>
-        <Text style={styles.team_container_text}>P2</Text>
-        <View style={styles.header_container}>
+         <View style={styles.header_container}>
           <View style={styles.scores_left_container} />
-          <View style={styles.team_container_top} />
+          <Text style={styles.score_left}>{this.state.player_score}</Text>
+          <Text style={styles.score_right}>{this.state.oppo_score}</Text>
+          <Text style={styles.timer}>90</Text>
           <View style={styles.timer_container} />
           <View style={styles.scores_right_container} />
           <View style={styles.score_background} />
+          <View style={styles.team_container_top} />
         </View>
         <View style={styles.bird_cage}>
           <GameEngine
@@ -178,6 +181,11 @@ export default class App extends Component {
             </TouchableOpacity>
           )}
         </View>
+        <Text style={styles.timer}>90</Text>
+        <Text style={styles.team_text_left}>P1</Text>
+        <Text style={styles.team_text_right}>P2</Text>
+        <Text style={styles.team_container_text}>P2</Text>
+      
         <View style={styles.bird_spot} />
         <View style={styles.stroke_bottom} />
         <View style={styles.stroke_top} />
@@ -189,8 +197,212 @@ export default class App extends Component {
 }
 
 const styles = StyleSheet.create({
+  bird_spot: {
+    position: 'relative',
+    bottom: hp("44%"),
+    alignSelf: 'center',
+    width: 100,
+    height: 100,
+    right: 3,
+    borderWidth: 8,
+    borderRadius: 100,
+    paddingBottom: 10,
+    zIndex: 1,
+    backgroundColor: 'white',
+    borderColor: '#250A26',
+  },
+
+ 
+  stroke_bottom: {
+    position: 'relative',
+    borderColor: 'rgba(255, 255, 255, .5)',
+    borderStyle: 'dotted',
+    borderWidth: 3,
+    bottom: hp("24%"),
+    width: 250,
+    alignSelf: 'center',
+    zIndex: 0,
+  },
+
+  stroke_top: {
+    position: 'relative',
+    borderColor: 'rgba(255, 255, 255, .5)',
+    borderStyle: 'dotted',
+    borderWidth: 3,
+    bottom: hp("75%"),
+    width: 250,
+    alignSelf: 'center',
+    zIndex: 2,
+  },
+
+  bird_cage: {    
+    position:'relative',
+    zIndex: 5,
+    top:hp("2%"),
+    height:hp("75%"),
+  },
+
+  team_container_text: {
+    position: 'absolute',
+    top: hp(8),
+    left: wp(47),
+    fontSize: 20,
+    color: 'white',
+    zIndex: 9999,
+    // fontFamily: 'FiraSansExtraCondensed-Bold',
+  },
+
+  team_text_left: {
+    position:'absolute',
+    color: 'black',
+    alignContent:'center',
+    top: hp(2),
+    left: wp(30),
+    fontSize: 23,
+    textAlign: 'center',
+    zIndex: 9999,
+    // fontFamily: 'FiraSansExtraCondensed-Medium',
+  },
+
+  team_text_right: {
+    position:'absolute',
+    color: 'black',
+    alignContent: 'center',
+    top: hp(2),
+    right: wp(30),
+    fontSize: 23,
+    textAlign: 'center',
+    zIndex: 9999,
+    // fontFamily: 'FiraSansExtraCondensed-Medium',
+  },
+
+  header_container: {
+    alignItems:'flex-start',
+    flexDirection: 'row',
+    justifyContent:'space-between',
+    zIndex: 8888,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.8,
+    shadowRadius: 7.1,
+    elevation: 13,
+  },
+
+  timer_container: {
+    width: 65,
+    height: 65,
+    borderWidth: 8,
+    borderRadius: 100,
+    zIndex: 99,
+    overflow: 'hidden',
+    backgroundColor: 'white',
+    borderColor: '#250A26',
+  },
+
+  timer: {
+    position:'absolute',
+    color: 'black',
+    fontSize: 35,
+    top:10,
+    left:wp("45%"),
+    textAlign: 'center',
+    zIndex: 999,
+    // fontFamily: 'FiraSansExtraCondensed-Bold',
+  },
+
+   floor_container: {
+    height: hp("93%"),
+    paddingBottom: 100,
+    backgroundColor: '#A83131',
+    borderBottomRightRadius: 30,
+    borderBottomLeftRadius: 30,
+    overflow: 'hidden',
+
+    flexDirection:'column',
+  },
+
+  score_background: {
+    position: 'absolute',
+    width: wp("100%"),
+    height: 60,
+    backgroundColor: '#FFB100',
+    borderBottomWidth: 10,
+    borderTopWidth: 10,
+    borderBottomColor: '#250A26',
+    borderTopColor: '#250A26',
+    zIndex: 2,
+  },
+
+
+  scores_left_container: {
+    height: 88,
+    width: 88,
+    backgroundColor: '#250A26',
+    zIndex: 99,
+    borderBottomRightRadius: 80,
+    overflow: 'hidden',
+  },
+
+  score_left: {
+    position:"absolute",
+    color: 'white',
+    top: 5,
+    left:wp("5%"),
+    fontSize: 44,
+    textAlign: 'center',
+    zIndex: 9999,
+    // fontFamily: 'FiraSansExtraCondensed-Bold',
+  },
+
+  scores_right_container: {
+    height: 88,
+    width: 88,
+    backgroundColor: '#250A26',
+    zIndex: 1,
+    borderBottomLeftRadius: 80,
+    zIndex: 99,
+    overflow: 'hidden',
+  },
+
+  score_right: {
+    position:"absolute",
+    color: 'white',
+    top: 5,
+    left:wp("88%"),
+    fontSize: 44,
+    textAlign: 'center',
+    zIndex: 9999,
+    // fontFamily: 'FiraSansExtraCondensed-Bold',
+  },
+
+  team_container_top: {
+    position:'absolute',
+    alignSelf:'center',
+    top:hp("1"),
+    right:hp("17.5%"),
+    width: 100,
+    height: 100,
+    borderBottomRightRadius: 50,
+    borderBottomLeftRadius: 50,
+    backgroundColor: '#250A26',
+    zIndex: 0,
+    overflow:'hidden',
+  },
+
+
+  center_bird: {
+    alignSelf: 'center',
+    zIndex: 999,
+  },
+
+
+  
   fullScreen: {
     position: 'absolute',
+    flex:1,
     top: 150,
     left: 0,
     right: 0,
@@ -216,7 +428,7 @@ const styles = StyleSheet.create({
     top: 20,
     fontSize: 55,
     zIndex: 99,
-    fontFamily: 'FiraSansExtraCondensed-Bold',
+    // fontFamily: 'FiraSansExtraCondensed-Bold',
     textShadowColor: 'black',
     textShadowOffset: {width: 3, height: 3},
     textShadowRadius: 2,
@@ -228,7 +440,7 @@ const styles = StyleSheet.create({
     top: 0,
     fontSize: 48,
     zIndex: 99,
-    fontFamily: 'FiraSansExtraCondensed-Bold',
+    // fontFamily: 'FiraSansExtraCondensed-Bold',
     textShadowColor: 'black',
     textShadowOffset: {width: 3, height: 3},
     textShadowRadius: 2,
@@ -239,208 +451,35 @@ const styles = StyleSheet.create({
     top: 0,
     fontSize: 24,
     zIndex: 99,
-    fontFamily: 'FiraSansExtraCondensed-Bold',
+    // fontFamily: 'FiraSansExtraCondensed-Bold',
     textShadowColor: 'black',
     textShadowOffset: {width: 3, height: 3},
     textShadowRadius: 2,
   },
 
-  floor_container: {
-    height: 840,
-    backgroundColor: '#A83131',
-    borderBottomRightRadius: 30,
-    borderBottomLeftRadius: 30,
-    overflow: 'hidden',
-  },
+ 
+ 
 
-  header_container: {
-    position: 'absolute',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    zIndex: 8888,
-    top: 0,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.8,
-    shadowRadius: 7.1,
-    elevation: 13,
-  },
 
-  bird_cage: {
-    position: 'relative',
-    zIndex: 5,
-    height: 670,
-    bottom: 160,
-    justifyContent: 'center',
-    overflow: 'hidden',
-  },
+  
+ 
 
-  center_bird: {
-    position: 'relative',
-    alignSelf: 'center',
-    zIndex: 2,
-  },
 
-  bird_spot: {
-    position: 'relative',
-    bottom: 550,
-    alignSelf: 'center',
-    width: 100,
-    height: 100,
-    right: 3,
-    borderWidth: 8,
-    borderRadius: 100,
-    paddingBottom: 10,
-    zIndex: 1,
-    backgroundColor: 'white',
-    borderColor: '#250A26',
-  },
-
-  score_background: {
-    position: 'absolute',
-    width: 400,
-    height: 60,
-    backgroundColor: '#FFB100',
-    borderBottomWidth: 10,
-    borderTopWidth: 10,
-    borderBottomColor: '#250A26',
-    borderTopColor: '#250A26',
-    justifyContent: 'center',
-    paddingTop: 20,
-  },
-
-  timer_container: {
-    position: 'relative',
-    right: 17,
-    width: 65,
-    height: 65,
-    borderWidth: 8,
-    borderRadius: 100,
-    paddingBottom: 10,
-    zIndex: 7,
-    overflow: 'hidden',
-    backgroundColor: 'white',
-    borderColor: '#250A26',
-  },
-
-  timer: {
-    position: 'relative',
-    alignContent:'center',
-    color: 'black',
-    fontSize: 35,
-    bottom: 95,
-    right: 3,
-    textAlign: 'center',
-    zIndex: 9999,
-    fontFamily: 'FiraSansExtraCondensed-Bold',
-  },
-
-  scores_left_container: {
-    position: 'relative',
-    height: 88,
-    width: 88,
-    backgroundColor: '#250A26',
-    zIndex: 1,
-    borderBottomRightRadius: 80,
-    overflow: 'hidden',
-  },
-
-  score_left: {
-    position: 'relative',
-    color: 'white',
-    top: 5,
-    right: 170,
-    fontSize: 44,
-    textAlign: 'center',
-    zIndex: 9999,
-    fontFamily: 'FiraSansExtraCondensed-Bold',
-  },
-
-  team_text_left: {
-    position: 'relative',
-    color: 'black',
-    paddingTop: 16,
-    alignContent:'center',
-    right: 75,
-    bottom: 146,
-    fontSize: 23,
-    textAlign: 'center',
-    zIndex: 9999,
-    fontFamily: 'FiraSansExtraCondensed-Medium',
-  },
-
-  team_text_right: {
-    position: 'relative',
-    color: 'black',
-    paddingTop: 16,
-    alignContent: 'center',
-    left: 75,
-    bottom: 190,
-    fontSize: 23,
-    textAlign: 'center',
-    zIndex: 9999,
-    fontFamily: 'FiraSansExtraCondensed-Medium',
-  },
-
-  scores_right_container: {
-    position: 'relative',
-    height: 88,
-    width: 88,
-    backgroundColor: '#250A26',
-    zIndex: 1,
-    left: 74,
-    borderBottomLeftRadius: 80,
-    overflow: 'hidden',
-  },
-
-  score_right: {
-    color: 'white',
-    bottom: 50,
-    alignContent: 'center',
-    left: 370,
-    fontSize: 44,
-    zIndex: 9999,
-    fontFamily: 'FiraSansExtraCondensed-Bold',
-  },
-
-  team_container_top: {
-    position: 'relative',
-    top: 10,
-    left: 65,
-    width: 100,
-    height: 100,
-    borderBottomRightRadius: 50,
-    borderBottomLeftRadius: 50,
-    backgroundColor: '#250A26',
-    zIndex: 0,
-  },
-
-  team_container_text: {
-    position: 'relative',
-    bottom: 165,
-    left: 188,
-    fontSize: 20,
-    color: 'white',
-    zIndex: 9999,
-    fontFamily: 'FiraSansExtraCondensed-Bold',
-  },
   team_container_text_bot: {
-    position: 'relative',
-    bottom: 480,
+    position: 'absolute',
+    bottom: hp("2%"),
     alignSelf: 'center',
     fontSize: 40,
     color: 'white',
     zIndex: 999,
-    fontFamily: 'FiraSansExtraCondensed-Bold',
+    // fontFamily: 'FiraSansExtraCondensed-Bold',
   },
 
   team_container_bottom: {
-    position: 'relative',
-    bottom: 280,
-    left: 118,
+    position:'absolute',
+    alignSelf:'center',
+    position:'relative',
+    bottom:hp("14%"),
     width: 180,
     height: 220,
     borderTopRightRadius: 100,
@@ -457,25 +496,7 @@ const styles = StyleSheet.create({
     elevation: 13,
   },
 
-  stroke_bottom: {
-    position: 'relative',
-    borderColor: 'rgba(255, 255, 255, .5)',
-    borderStyle: 'dotted',
-    borderWidth: 3,
-    bottom: 355,
-    width: 250,
-    alignSelf: 'center',
-    zIndex: 0,
-  },
+  
 
-  stroke_top: {
-    position: 'relative',
-    borderColor: 'rgba(255, 255, 255, .5)',
-    borderStyle: 'dotted',
-    borderWidth: 3,
-    bottom: 840,
-    width: 250,
-    alignSelf: 'center',
-    zIndex: 0,
-  },
+
 });

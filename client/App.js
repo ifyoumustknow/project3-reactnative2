@@ -5,7 +5,6 @@ import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
 import HomeScreen from './screens/HomeScreen';
 import SignInScreen from './screens/SignInScreen';
 
