@@ -1,5 +1,6 @@
 
 import * as Font from 'expo-font';
+import io from 'socket.io-client';
 
 export default class App extends Component {
 
