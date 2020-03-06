@@ -7,7 +7,7 @@ import * as Font from 'expo-font';
 export default class App extends Component {
 
   componentDidMount(){
-    const socket =io("http://127.0.0.1:3001")
+    const socket =io("https://tap4tap.herokuapp.com/")
   
   }
   render(){

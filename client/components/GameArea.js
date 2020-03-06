@@ -9,10 +9,10 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import Constants from '../components/Constants';
+import Constants from './Constants';
 import {GameEngine} from 'react-native-game-engine';
 import Matter from 'matter-js';
-import Bird from '../components/Bird';
+import Bird from './Bird';
 import Player from './Player';
 import Opponent from './Opponent';
 import Physics from './Physics';
@@ -35,6 +35,7 @@ export default class App extends Component {
       oppo_score: 0,
       oppo_name: '',
       play_name: '',
+      scoreboard: false,
     };
 
     this.gameEngine = null;
@@ -57,7 +58,7 @@ export default class App extends Component {
 
     let player = Matter.Bodies.rectangle(
       Constants.MAX_WIDTH / 2,
-      Constants.MAX_HEIGHT + 400,
+      Constants.MAX_HEIGHT + hp("46%"),
       Constants.MAX_WIDTH,
       10,
       {isStatic: true},
@@ -65,26 +66,35 @@ export default class App extends Component {
 
     let opponent = Matter.Bodies.rectangle(
       Constants.MAX_WIDTH / 2,
-      Constants.MAX_HEIGHT - 1555,
+      Constants.MAX_HEIGHT - 1550,
       Constants.MAX_WIDTH,
       10,
       {isStatic: true},
     );
 
     //needs attention
-    Matter.World.add(world, [bird, opponent]);
+    Matter.World.add(world, [bird, opponent, player]);
     Matter.Events.on(engine, 'collisionStart', event => {
-      var bird = event.opponent;
-      this.gameEngine.dispatch({type: 'game-over'});
-      world.gravity.y = 0.0;
+      var pairs= event.pairs;
+      console.log(bird.position)
+      if (bird.position.y < Constants.MAX_HEIGHT /2){
+        this.gameEngine.dispatch({type: 'game-over'});
+        world.gravity.y = 0.0;
+      }else{
+        this.gameEngine.dispatch({type: 'win'});
+        world.gravity.y = 0.0;
+
+      }
+
     });
 
-    Matter.World.add(world, [bird, player]);
-    Matter.Events.on(engine, 'collisionStart', event => {
-      var bird = event.player;
-      this.gameEngine.dispatch({type: 'win'});
-      world.gravity.y = 0.0;
-    });
+    // Matter.World.add(world, [bird, player]);
+    // Matter.Events.on(engine, 'collisionStart2', event => {
+    //   var pairs2= event.pairs2;
+    //   this.gameEngine.dispatch({type: 'win'});
+    //   world.gravity.y = 0.0;
+    //   console.log(bird.position)
+    // });
 
     return {
       physics: {engine: engine, world: world},
@@ -94,21 +104,24 @@ export default class App extends Component {
     };
   };
 
+
   // needs attention!!!!!//
   onEvent = e => {
+    console.log(e.type)
     if (e.type === 'game-over') {
-      //Alert.alert("GAME OVER");
-      this.setState({
-        losing: false,
-        winning: true,
-        start: true,
-        oppo_score: this.state.oppo_score + 1,
-      });
-    } else if (e.type === 'win') {
       this.setState({
         losing: true,
         winning: false,
         start: false,
+        scoreboard: true,
+        oppo_score: this.state.oppo_score + 1,
+      });
+    } else if (e.type === 'win') {
+      this.setState({
+        losing: false,
+        winning: true,
+        start: false,
+        scoreboard: true,
         player_score: this.state.player_score + 1,
       });
     }
@@ -118,11 +131,11 @@ export default class App extends Component {
     this.gameEngine.swap(this.setupWorld());
     this.setState({
       start: false,
-      losing: true,
-      winning: true,
+      losing: false,
+      winning: false,
+      scoreboard:false,
     });
   };
-
 
   render() {
     return (
@@ -151,7 +164,7 @@ export default class App extends Component {
             entities={this.entities}>
             <StatusBar hidden={true} />
           </GameEngine>
-          {!this.state.losing && (
+          {this.state.scoreboard && this.state.losing && (
             <TouchableOpacity
               style={styles.fullScreenButton}
               onPress={this.reset}>
@@ -161,7 +174,7 @@ export default class App extends Component {
               </View>
             </TouchableOpacity>
           )}
-          {!this.state.winning && (
+          {this.state.scoreboard && this.state.winning && (
             <TouchableOpacity
               style={styles.fullScreenButton}
               onPress={this.reset}>
@@ -249,7 +262,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: 'white',
     zIndex: 9999,
-    // fontFamily: 'FiraSansExtraCondensed-Bold',
+    fontFamily: 'FiraSansExtraCondensed-Bold',
   },
 
   team_text_left: {
@@ -261,7 +274,7 @@ const styles = StyleSheet.create({
     fontSize: 23,
     textAlign: 'center',
     zIndex: 9999,
-    // fontFamily: 'FiraSansExtraCondensed-Medium',
+    fontFamily: 'FiraSansExtraCondensed-Medium',
   },
 
   team_text_right: {
@@ -307,10 +320,10 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 35,
     top:10,
-    left:wp("4%"),
+    left:wp("45.6%"),
     textAlign: 'center',
     zIndex: 999,
-    // fontFamily: 'FiraSansExtraCondensed-Bold',
+    fontFamily: 'FiraSansExtraCondensed-Bold',
   },
 
    floor_container: {
@@ -354,7 +367,7 @@ const styles = StyleSheet.create({
     fontSize: 44,
     textAlign: 'center',
     zIndex: 9999,
-    // fontFamily: 'FiraSansExtraCondensed-Bold',
+    fontFamily: 'FiraSansExtraCondensed-Bold',
   },
 
   scores_right_container: {
@@ -375,7 +388,7 @@ const styles = StyleSheet.create({
     fontSize: 44,
     textAlign: 'center',
     zIndex: 9999,
-    // fontFamily: 'FiraSansExtraCondensed-Bold',
+    fontFamily: 'FiraSansExtraCondensed-Bold',
   },
 
   team_container_top: {
@@ -428,7 +441,7 @@ const styles = StyleSheet.create({
     top: 20,
     fontSize: 55,
     zIndex: 99,
-    // fontFamily: 'FiraSansExtraCondensed-Bold',
+    fontFamily: 'FiraSansExtraCondensed-Bold',
     textShadowColor: 'black',
     textShadowOffset: {width: 3, height: 3},
     textShadowRadius: 2,
@@ -440,7 +453,7 @@ const styles = StyleSheet.create({
     top: 0,
     fontSize: 48,
     zIndex: 99,
-    // fontFamily: 'FiraSansExtraCondensed-Bold',
+    fontFamily: 'FiraSansExtraCondensed-Bold',
     textShadowColor: 'black',
     textShadowOffset: {width: 3, height: 3},
     textShadowRadius: 2,
@@ -451,7 +464,7 @@ const styles = StyleSheet.create({
     top: 0,
     fontSize: 24,
     zIndex: 99,
-    // fontFamily: 'FiraSansExtraCondensed-Bold',
+    fontFamily: 'FiraSansExtraCondensed-Bold',
     textShadowColor: 'black',
     textShadowOffset: {width: 3, height: 3},
     textShadowRadius: 2,
@@ -472,7 +485,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     color: 'white',
     zIndex: 999,
-    // fontFamily: 'FiraSansExtraCondensed-Bold',
+    fontFamily: 'FiraSansExtraCondensed-Bold',
   },
 
   team_container_bottom: {
