@@ -15,70 +15,77 @@ export default function SignInScreen({navigation}) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.signInSheet}>
           <Image
           style={styles.tapSignInImage}
           source={require('../components/assets/images/tapSignIn.png')}/>
           <TextInput
       style={styles.playerName}
       onChangeText={text => onChangePlayerName(text)}
-      value={playerName}
+      placeholder={playerName}
     />
     <TextInput
       style={styles.password}
       onChangeText={text => onChangePassword(text)}
-      value={password}
+      placeholder={password}
     />
      <TouchableOpacity style={styles.signInButton}
-            
               onPress={() => navigation.navigate('GameArea')}>
-              <Text style={styles.signInButtonText}>F</Text>
+              <Text style={styles.signInButtonText}>SIGN IN</Text>
       </TouchableOpacity>
-      </View>
-      <Button title="Back" color="white" onPress={() => navigation.navigate('HomePage')}>Back</Button>
+      <TouchableOpacity style={styles.backButton}
+              onPress={() => navigation.navigate('HomePage')}>
+              <Text style={styles.signInButtonText}>Back</Text>
+      </TouchableOpacity>
+    
     </View>
   );
 }
 
 SignInScreen.navigationOptions = {
+
   headerShown: false,
 };
 
 const styles = StyleSheet.create({
+  backButton: {
+    alignSelf: 'center',
+    marginTop: 30,
+    color:"white",
+  },
+
   signInButton: {
     alignSelf:'center',
     width: 250,
-    height:10,
+    height: 9,
     paddingTop:25,
     paddingBottom:25,
     backgroundColor:'#A83131',
     borderRadius: 45,
-    marginTop: 20,
+    marginTop: 30,
     shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.8,
-    shadowRadius: 7.1,
-    elevation: 13,
+
   },
 
   signInButtonText: {
+    position:'absolute',
+    alignSelf:'center',
     color:'white',
-    fontSize: 45,
+    fontSize: 23,
     fontWeight: 'bold',
     textAlign:'center',
     paddingLeft : 2,
     paddingRight : 10,
-    paddingTop : 5,
+    paddingTop : 10,
     zIndex:9999,
   },
 
   container: {
+      flex:1,
+      justifyContent:'center',
       height: 900,
       backgroundColor: '#250A26',
   },
+
   playerName: {
     backgroundColor: 'white',
     height: 40,
@@ -102,14 +109,14 @@ const styles = StyleSheet.create({
     fontFamily: 'FiraSansExtraCondensed-Bold',
 
   },
-  signInSheet: {
-      height: 300,
-      width: 350,
-      marginTop: 230,
-      alignSelf: "center",
-      borderRadius: 30,
-      backgroundColor: '#B49A9A'
-  },
+  // signInSheet: {
+  //     height: 300,
+  //     width: 350,
+  //     marginTop: 230,
+  //     alignSelf: "center",
+  //     borderRadius: 30,
+  //     backgroundColor: '#B49A9A'
+  // },
   tapSignInImage: {
       alignSelf: "center",
       marginTop: 10,

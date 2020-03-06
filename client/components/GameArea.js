@@ -16,6 +16,9 @@ import Player from './Player';
 import Opponent from './Opponent';
 import Physics from './Physics';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+
 
 export default class App extends Component {
 
@@ -173,21 +176,31 @@ export default class App extends Component {
               onPress={this.reset}>
               <View style={styles.fullScreen}>
                 <Text style={styles.gameOverText}>GAME OVER</Text>
-                <Text style={styles.gameOverSubText}>Try Again</Text>
-                <Button style={styles.gameOverSubText} title="Quit" color="white" onPress={() => this.props.navigation.navigate('HomePage')}>Quit</Button>
+                <TouchableOpacity style={styles.backButton}
+                onPress={() => navigation.navigate('HomePage')}>
+                <Text style={styles.gameOverSubText}>Tap Out</Text>
+                </TouchableOpacity>
+
+                <Text style={styles.TapOutText}>Rematch</Text>
+               
               </View>
             </TouchableOpacity>
           )}
           {this.state.scoreboard && this.state.winning && (
-            <TouchableOpacity
-              style={styles.fullScreenButton}
-              onPress={this.reset}>
-              <View style={styles.fullScreen}>
-                <Text style={styles.gameOverText}>YOU WIN</Text>
-                <Text style={styles.gameOverSubText}>Try Again</Text>
-                <Button title="Quit" color="white" onPress={() => this.reset && this.props.navigation.navigate('HomePage')}>Quit</Button>
-              </View>
-            </TouchableOpacity>
+         <TouchableOpacity
+         style={styles.fullScreenButton}
+         onPress={this.reset}>
+         <View style={styles.fullScreen}>
+           <Text style={styles.gameOverText}>GAME OVER</Text>
+           <TouchableOpacity style={styles.backButton}
+           onPress={() => navigation.navigate('HomePage')}>
+           <Text style={styles.gameOverSubText}>Tap Out</Text>
+           </TouchableOpacity>
+
+           <Text style={styles.TapOutText}>Rematch</Text>
+          
+         </View>
+       </TouchableOpacity>
           )}
           {this.state.start && (
             <TouchableOpacity
@@ -483,13 +496,17 @@ const styles = StyleSheet.create({
     textShadowRadius: 2,
   },
 
- 
- 
-
-
-  
- 
-
+  TapOutText: {
+    color: 'white',
+    top: 0,
+    marginTop:200,
+    fontSize: 34,
+    zIndex: 99,
+    fontFamily: 'FiraSansExtraCondensed-Bold',
+    textShadowColor: 'black',
+    textShadowOffset: {width: 3, height: 3},
+    textShadowRadius: 2,
+  },
 
   team_container_text_bot: {
     position: 'absolute',

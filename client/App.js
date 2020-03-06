@@ -23,12 +23,12 @@ const navigator = createStackNavigator(
 );
 
 const fetchFonts = () => {
-
   return Font.loadAsync({
     'FiraSansExtraCondensed-Bold': require('./components/assets/fonts/FiraSansExtraCondensed-Bold.ttf'),
     'FiraSansExtraCondensed-Medium': require('./components/assets/fonts/FiraSansExtraCondensed-Medium.ttf'),
   });
   };
+  
 const App = createAppContainer(navigator);
 
 export default () => {

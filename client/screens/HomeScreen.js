@@ -16,7 +16,7 @@ export default function HomeScreen({navigation}) {
       </TouchableOpacity>
       <TouchableOpacity style={styles.createPlayerButton}
               color='white'
-              title="SIGN IN"
+              title="CREATE"
               underlayColor='#fff'>
               <Text style={styles.createPlayerText}>CREATE PLAYER</Text>
       </TouchableOpacity>
