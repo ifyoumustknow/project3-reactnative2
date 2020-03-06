@@ -270,7 +270,7 @@ const styles = StyleSheet.create({
     fontSize: 23,
     textAlign: 'center',
     zIndex: 9999,
-    // fontFamily: 'FiraSansExtraCondensed-Medium',
+    fontFamily: 'FiraSansExtraCondensed-Medium',
   },
 
   header_container: {
@@ -304,7 +304,7 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 35,
     top:10,
-    left:wp("45%"),
+    left:wp("4%"),
     textAlign: 'center',
     zIndex: 999,
     // fontFamily: 'FiraSansExtraCondensed-Bold',
