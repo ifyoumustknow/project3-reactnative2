@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect} from "react";
 import {View, StyleSheet} from 'react-native';
 import io from 'socket.io-client';
 
@@ -9,8 +9,6 @@ import HomeScreen from './screens/HomeScreen';
 import SignInScreen from './screens/SignInScreen';
 import GameArea from './components/GameArea';
 
-
-
 const navigator = createStackNavigator(
   {
     HomePage: HomeScreen,
@@ -18,11 +16,24 @@ const navigator = createStackNavigator(
     GameArea: GameArea
   },
   {
-    initialRouteName: 'SignIn',
+    initialRouteName: 'GameArea',
     defaultNavigationOptions: {
       headerShown: false
     }
   }
 );
 
-export default createAppContainer(navigator);
+const App = createAppContainer(navigator);
+
+export default () => {
+  return <App styles={styles.container}/>
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 35,
+    backgroundColor: '#250A26',
+  },
+});
+
