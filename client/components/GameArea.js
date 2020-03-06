@@ -37,8 +37,14 @@ export default class App extends Component {
     this.entities = this.setupWorld();
     }
 
-  loadFonts = () => {
-    Fonts();
+  // loadFonts = () => {
+  //   Fonts('FiraSansExtraCondensed-Bold', 'FiraSansExtraCondensed-Medium');
+  // }
+  componentDidMount() {
+    Expo.Font.loadAsync({
+      'FiraSansExtraCondensed-Bold': require('./assets/fonts/FiraSansExtraCondensed-Bold.ttf'),
+      'FiraSansExtraCondensed-Medium': require('./assets/fonts/FiraSansExtraCondensed-Medium.ttf'),
+    });
   }
    
   setupWorld = () => {
@@ -135,6 +141,7 @@ export default class App extends Component {
 
   render() {
     return (
+      <View style={styles.container}>
       <View style={styles.floor_container}>
          <View style={styles.header_container}>
           <View style={styles.scores_left_container} />
@@ -167,7 +174,7 @@ export default class App extends Component {
               <View style={styles.fullScreen}>
                 <Text style={styles.gameOverText}>GAME OVER</Text>
                 <Text style={styles.gameOverSubText}>Try Again</Text>
-                <Button title="Quit" color="white" onPress={() => this.props.navigation.navigate('HomePage')}>Quit</Button>
+                <Button style={styles.gameOverSubText} title="Quit" color="white" onPress={() => this.props.navigation.navigate('HomePage')}>Quit</Button>
               </View>
             </TouchableOpacity>
           )}
@@ -178,7 +185,7 @@ export default class App extends Component {
               <View style={styles.fullScreen}>
                 <Text style={styles.gameOverText}>YOU WIN</Text>
                 <Text style={styles.gameOverSubText}>Try Again</Text>
-                <Button title="Quit" color="white" onPress={() => this.props.navigation.navigate('HomePage')}>Quit</Button>
+                <Button title="Quit" color="white" onPress={() => this.reset && this.props.navigation.navigate('HomePage')}>Quit</Button>
               </View>
             </TouchableOpacity>
           )}
@@ -203,11 +210,19 @@ export default class App extends Component {
         <View style={styles.team_container_bottom} />
         <Text style={styles.team_container_text_bot}>P1</Text>
       </View>
+      </View>
+      
     );
   }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 35,
+    backgroundColor: '#250A26',
+  },
+
   bird_spot: {
     position: 'relative',
     bottom: hp("44%"),

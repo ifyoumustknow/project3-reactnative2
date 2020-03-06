@@ -1,21 +1,22 @@
+import React, { Component, useState, useEffect} from "react";
+import {View, StyleSheet} from 'react-native';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createAppContainer } from 'react-navigation';
+import HomeScreen from './screens/HomeScreen';
+import SignInScreen from './screens/SignInScreen';
+import GameArea from './components/GameArea';
 
-import * as Font from 'expo-font';
-import io from 'socket.io-client';
+const Stack = createStackNavigator();
 
-export default class App extends Component {
+function MyStack() {
 
-  componentDidMount(){
-    const socket =io("https://tap4tap.herokuapp.com/")
-
-  }
- 
-  render(){
-    return (
-      <View style={styles.container}>
-        <GameArea />
-      </View>
-    );
-  }
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home"  style={styles.container} component={HomeScreen } />
+      <Stack.Screen name="SignIn" component={SignInScreen} />
+      <Stack.Screen name="GameArea" component={GameArea} />
+    </Stack.Navigator>
+  );
 }
 
 const styles = StyleSheet.create({
