@@ -7,8 +7,8 @@ const Physics = (entities, {touches, time}) => {
   touches
     .filter(t => t.type === 'press')
     .forEach(t => {
-      Matter.Body.applyForce(bird, bird.position, {x: 0.0, y: 0.27});
-      engine.world.gravity.y = -0.1;
+      Matter.Body.applyForce(bird, bird.position, {x: 0.0, y: 0.7});
+      engine.world.gravity.y = -0.5;
     });
 
   Matter.Engine.update(engine, time.delta);

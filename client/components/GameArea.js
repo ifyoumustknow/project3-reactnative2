@@ -75,15 +75,13 @@ export default class App extends Component {
     Matter.Events.on(engine, 'collisionStart', event => {
       var pairs= event.pairs;
       console.log(bird.position)
-      if (bird.position.y < Constants.MAX_HEIGHT /2){
+      if (bird.position.y < Constants.MAX_HEIGHT / 2){
         this.gameEngine.dispatch({type: 'game-over'});
         world.gravity.y = 0.0;
       }else{
         this.gameEngine.dispatch({type: 'win'});
-        world.gravity.y = 0.0;
-
+              world.gravity.y = 0.0;
       }
-
     });
 
     // Matter.World.add(world, [bird, player]);
