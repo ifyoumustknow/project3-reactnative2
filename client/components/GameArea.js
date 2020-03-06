@@ -11,7 +11,7 @@ import Fonts from '../utils/fonts';
 import Constants from '../components/Constants';
 import {GameEngine} from 'react-native-game-engine';
 import Matter from 'matter-js';
-import Bird from '../components/Bird';
+import Bird from './Bird';
 import Player from './Player';
 import Opponent from './Opponent';
 import Physics from './Physics';
@@ -31,6 +31,7 @@ export default class App extends Component {
       oppo_score: 0,
       oppo_name: '',
       play_name: '',
+      scoreboard: false,
     };
     this.gameEngine = null;
     this.entities = this.setupWorld();
@@ -55,7 +56,7 @@ export default class App extends Component {
 
     let player = Matter.Bodies.rectangle(
       Constants.MAX_WIDTH / 2,
-      Constants.MAX_HEIGHT + 400,
+      Constants.MAX_HEIGHT + hp("46%"),
       Constants.MAX_WIDTH,
       10,
       {isStatic: true},
@@ -63,26 +64,35 @@ export default class App extends Component {
 
     let opponent = Matter.Bodies.rectangle(
       Constants.MAX_WIDTH / 2,
-      Constants.MAX_HEIGHT - 1555,
+      Constants.MAX_HEIGHT - 1550,
       Constants.MAX_WIDTH,
       10,
       {isStatic: true},
     );
 
     //needs attention
-    Matter.World.add(world, [bird, opponent]);
+    Matter.World.add(world, [bird, opponent, player]);
     Matter.Events.on(engine, 'collisionStart', event => {
-      var bird = event.opponent;
-      this.gameEngine.dispatch({type: 'game-over'});
-      world.gravity.y = 0.0;
+      var pairs= event.pairs;
+      console.log(bird.position)
+      if (bird.position.y < Constants.MAX_HEIGHT /2){
+        this.gameEngine.dispatch({type: 'game-over'});
+        world.gravity.y = 0.0;
+      }else{
+        this.gameEngine.dispatch({type: 'win'});
+        world.gravity.y = 0.0;
+
+      }
+
     });
 
-    Matter.World.add(world, [bird, player]);
-    Matter.Events.on(engine, 'collisionStart', event => {
-      var bird = event.player;
-      this.gameEngine.dispatch({type: 'win'});
-      world.gravity.y = 0.0;
-    });
+    // Matter.World.add(world, [bird, player]);
+    // Matter.Events.on(engine, 'collisionStart2', event => {
+    //   var pairs2= event.pairs2;
+    //   this.gameEngine.dispatch({type: 'win'});
+    //   world.gravity.y = 0.0;
+    //   console.log(bird.position)
+    // });
 
     return {
       physics: {engine: engine, world: world},
@@ -92,21 +102,24 @@ export default class App extends Component {
     };
   };
 
+
   // needs attention!!!!!//
   onEvent = e => {
+    console.log(e.type)
     if (e.type === 'game-over') {
-      //Alert.alert("GAME OVER");
-      this.setState({
-        losing: false,
-        winning: true,
-        start: true,
-        oppo_score: this.state.oppo_score + 1,
-      });
-    } else if (e.type === 'win') {
       this.setState({
         losing: true,
         winning: false,
         start: false,
+        scoreboard: true,
+        oppo_score: this.state.oppo_score + 1,
+      });
+    } else if (e.type === 'win') {
+      this.setState({
+        losing: false,
+        winning: true,
+        start: false,
+        scoreboard: true,
         player_score: this.state.player_score + 1,
       });
     }
@@ -116,11 +129,11 @@ export default class App extends Component {
     this.gameEngine.swap(this.setupWorld());
     this.setState({
       start: false,
-      losing: true,
-      winning: true,
+      losing: false,
+      winning: false,
+      scoreboard:false,
     });
   };
-
 
   render() {
     return (
@@ -149,7 +162,7 @@ export default class App extends Component {
             entities={this.entities}>
             <StatusBar hidden={true} />
           </GameEngine>
-          {!this.state.losing && (
+          {this.state.scoreboard && this.state.losing && (
             <TouchableOpacity
               style={styles.fullScreenButton}
               onPress={this.reset}>
@@ -160,7 +173,7 @@ export default class App extends Component {
               </View>
             </TouchableOpacity>
           )}
-          {!this.state.winning && (
+          {this.state.scoreboard && this.state.winning && (
             <TouchableOpacity
               style={styles.fullScreenButton}
               onPress={this.reset}>
@@ -307,7 +320,7 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 35,
     top:10,
-    left:wp("4%"),
+    left:wp("45.6%"),
     textAlign: 'center',
     zIndex: 999,
     fontFamily: 'FiraSansExtraCondensed-Bold',
