@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, View, Image , TouchableOpacity, Text} from 'react-native';
 
-export default function HomeScreen() {
+export default function HomeScreen({navigation}) {
   return (
     <View style={styles.container}>
       <Image style={styles.backgroundImage}
@@ -10,7 +10,8 @@ export default function HomeScreen() {
       <TouchableOpacity style={styles.signInButton}
               color='white'
               title="SIGN IN"
-              underlayColor='#fff'>
+              underlayColor='#fff'
+              onPress={() => navigation.navigate('SignIn')}>
               <Text style={styles.signInButtonText}>SIGN IN</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.createPlayerButton}

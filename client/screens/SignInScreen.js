@@ -5,6 +5,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 export default function SignInScreen({navigation}) {
+  console.log(navigation)
   const [playerName, onChangePlayerName] = React.useState('PLAYER NAME');
   const [password, onChangePassword] = React.useState('PASSWORD');
   return (
@@ -24,7 +25,7 @@ export default function SignInScreen({navigation}) {
       value={password}
     />
       </View>
-      <Button title="Back" color="white" onPress={() => navigation.navigate('HomeScreen', {name: 'Home'})}>Back</Button>
+      <Button title="Back" color="white" onPress={() => navigation.navigate('HomePage')}>Back</Button>
     </View>
   );
 }

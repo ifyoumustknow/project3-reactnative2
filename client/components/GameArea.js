@@ -9,10 +9,10 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import Constants from './Constants';
+import Constants from '../components/Constants';
 import {GameEngine} from 'react-native-game-engine';
 import Matter from 'matter-js';
-import Bird from './Bird';
+import Bird from '../components/Bird';
 import Player from './Player';
 import Opponent from './Opponent';
 import Physics from './Physics';
