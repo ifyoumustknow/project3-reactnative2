@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
 import {
-  Dimensions,
   StyleSheet,
   Text,
   View,
   StatusBar,
-  Alert,
   TouchableOpacity,
-  Image,
+  Button
 } from 'react-native';
 import Constants from './Constants';
 import {GameEngine} from 'react-native-game-engine';
@@ -17,9 +15,6 @@ import Player from './Player';
 import Opponent from './Opponent';
 import Physics from './Physics';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-
-
-
 
 export default class App extends Component {
 
@@ -171,6 +166,7 @@ export default class App extends Component {
               <View style={styles.fullScreen}>
                 <Text style={styles.gameOverText}>GAME OVER</Text>
                 <Text style={styles.gameOverSubText}>Try Again</Text>
+                <Button title="Quit" color="white" onPress={() => this.props.navigation.navigate('HomePage')}>Quit</Button>
               </View>
             </TouchableOpacity>
           )}
@@ -181,6 +177,7 @@ export default class App extends Component {
               <View style={styles.fullScreen}>
                 <Text style={styles.gameOverText}>YOU WIN</Text>
                 <Text style={styles.gameOverSubText}>Try Again</Text>
+                <Button title="Quit" color="white" onPress={() => this.props.navigation.navigate('HomePage')}>Quit</Button>
               </View>
             </TouchableOpacity>
           )}

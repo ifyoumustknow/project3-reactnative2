@@ -5,7 +5,10 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 export default function SignInScreen({navigation}) {
-  console.log(navigation)
+
+  // Debugging
+  // console.log(navigation)
+
   const [playerName, onChangePlayerName] = React.useState('PLAYER NAME');
   const [password, onChangePassword] = React.useState('PASSWORD');
   return (
@@ -24,6 +27,7 @@ export default function SignInScreen({navigation}) {
       onChangeText={text => onChangePassword(text)}
       value={password}
     />
+     <Button title="Submit" color="white" onPress={() => navigation.navigate('GameArea')}>SUBMIT</Button>
       </View>
       <Button title="Back" color="white" onPress={() => navigation.navigate('HomePage')}>Back</Button>
     </View>
@@ -31,7 +35,7 @@ export default function SignInScreen({navigation}) {
 }
 
 SignInScreen.navigationOptions = {
-  header: null,
+  headerShown: false,
 };
 
 const styles = StyleSheet.create({

@@ -1,15 +1,13 @@
-import React, { Component } from "react";
-import {View, StyleSheet} from 'react-native';
-import GameArea from './components/GameArea';
-import io from 'socket.io-client';
+
 import * as Font from 'expo-font';
 
 export default class App extends Component {
 
   componentDidMount(){
     const socket =io("https://tap4tap.herokuapp.com/")
-  
+
   }
+ 
   render(){
     return (
       <View style={styles.container}>
