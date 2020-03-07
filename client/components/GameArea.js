@@ -5,9 +5,9 @@ import {
   View,
   StatusBar,
   TouchableOpacity,
-  Button
+  Button,
+  Alert
 } from 'react-native';
-import Fonts from '../utils/fonts';
 import Constants from '../components/Constants';
 import {GameEngine} from 'react-native-game-engine';
 import Matter from 'matter-js';
@@ -16,8 +16,7 @@ import Player from './Player';
 import Opponent from './Opponent';
 import Physics from './Physics';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+
 
 
 export default class App extends Component {
@@ -35,6 +34,7 @@ export default class App extends Component {
       oppo_name: '',
       play_name: '',
       scoreboard: false,
+      touch: false,
     };
     this.gameEngine = null;
     this.entities = this.setupWorld();
@@ -43,12 +43,7 @@ export default class App extends Component {
   // loadFonts = () => {
   //   Fonts('FiraSansExtraCondensed-Bold', 'FiraSansExtraCondensed-Medium');
   // }
-  componentDidMount() {
-    Expo.Font.loadAsync({
-      'FiraSansExtraCondensed-Bold': require('./assets/fonts/FiraSansExtraCondensed-Bold.ttf'),
-      'FiraSansExtraCondensed-Medium': require('./assets/fonts/FiraSansExtraCondensed-Medium.ttf'),
-    });
-  }
+
    
   setupWorld = () => {
     let engine = Matter.Engine.create({enableSleeping: false});
@@ -65,7 +60,7 @@ export default class App extends Component {
 
     let player = Matter.Bodies.rectangle(
       Constants.MAX_WIDTH / 2,
-      Constants.MAX_HEIGHT + hp("46%"),
+      Constants.MAX_HEIGHT + 460,
       Constants.MAX_WIDTH,
       10,
       {isStatic: true},
@@ -150,7 +145,7 @@ export default class App extends Component {
           <View style={styles.scores_left_container} />
           <Text style={styles.score_left}>{this.state.player_score}</Text>
           <Text style={styles.score_right}>{this.state.oppo_score}</Text>
-          <Text style={styles.timer}>90</Text>
+          <Text style={styles.timer}></Text>
           <View style={styles.timer_container} />
           <View style={styles.scores_right_container} />
           <View style={styles.score_background} />
@@ -172,35 +167,31 @@ export default class App extends Component {
           </GameEngine>
           {this.state.scoreboard && this.state.losing && (
             <TouchableOpacity
-              style={styles.fullScreenButton}
-              onPress={this.reset}>
+              style={styles.fullScreenButton}>
               <View style={styles.fullScreen}>
                 <Text style={styles.gameOverText}>GAME OVER</Text>
                 <TouchableOpacity style={styles.backButton}
-                onPress={() => navigation.navigate('HomePage')}>
+                onPress={() => this.props.navigation.navigate('HomePage')}>
                 <Text style={styles.gameOverSubText}>Tap Out</Text>
                 </TouchableOpacity>
-
-                <Text style={styles.TapOutText}>Rematch</Text>
-               
+                <Text style={styles.TapOutText}
+                onPress={this.reset}>Rematch</Text>
               </View>
             </TouchableOpacity>
           )}
           {this.state.scoreboard && this.state.winning && (
          <TouchableOpacity
-         style={styles.fullScreenButton}
-         onPress={this.reset}>
+         style={styles.fullScreenButton}>
          <View style={styles.fullScreen}>
-           <Text style={styles.gameOverText}>GAME OVER</Text>
+           <Text style={styles.gameOverText}>You Win</Text>
            <TouchableOpacity style={styles.backButton}
-           onPress={() => navigation.navigate('HomePage')}>
+           onPress={() => this.props.navigation.navigate('HomePage')}>
            <Text style={styles.gameOverSubText}>Tap Out</Text>
            </TouchableOpacity>
-
-           <Text style={styles.TapOutText}>Rematch</Text>
-          
+           <Text style={styles.TapOutText}
+            onPress={this.reset}>Rematch</Text>
          </View>
-       </TouchableOpacity>
+          </TouchableOpacity>
           )}
           {this.state.start && (
             <TouchableOpacity
