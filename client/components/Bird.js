@@ -20,6 +20,7 @@ export default class Bird extends Component {
           width: width,
           height: height,
         }}
+        resizeMode="contain"
         source={image}
       />
     );

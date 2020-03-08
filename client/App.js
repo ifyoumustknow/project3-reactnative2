@@ -5,8 +5,7 @@ import { createAppContainer } from 'react-navigation';
 import HomeScreen from './screens/HomeScreen';
 import SignInScreen from './screens/SignInScreen';
 import GameArea from './components/GameArea';
-import * as Font from 'expo-font';
-import { AppLoading } from 'expo';
+
 
 const navigator = createStackNavigator(
   {
@@ -22,13 +21,6 @@ const navigator = createStackNavigator(
   }
 );
 
-const fetchFonts = () => {
-  return Font.loadAsync({
-    'FiraSansExtraCondensed-Bold': require('./components/assets/fonts/FiraSansExtraCondensed-Bold.ttf'),
-    'FiraSansExtraCondensed-Medium': require('./components/assets/fonts/FiraSansExtraCondensed-Medium.ttf'),
-  });
-  };
-  
 const App = createAppContainer(navigator);
 
 export default () => {

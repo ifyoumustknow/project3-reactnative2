@@ -11,7 +11,7 @@ export default class Player extends Component {
     return (
       <View
         style={{
-          position: 'absolute',
+          position: 'relative',
           left: x,
           top: y,
           width: width,
