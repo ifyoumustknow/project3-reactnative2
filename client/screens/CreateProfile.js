@@ -3,36 +3,39 @@ import { StyleSheet, View, Button, Image, TextInput, Text, TouchableOpacity} fro
 import { getOrientationAsync } from 'expo/build/ScreenOrientation/ScreenOrientation';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import Upload from '../components/Upload';
 
 export default function SignInScreen({navigation}) {
   
 
-  // Debugging
-  // console.log(navigation)
-
   const [playerName, onChangePlayerName] = React.useState('PLAYER NAME');
   const [password, onChangePassword] = React.useState('PASSWORD');
 
+
   return (
     <View style={styles.container}>
-      <Text style={styles.Title}>SIGN IN</Text>
-          <TextInput
+      <Text style={styles.Title}>CREATE PROFILE</Text>
+      <View>
+      <Upload/>
+      </View>
+          <TextInput 
       style={styles.playerName}
       onChangeText={text => onChangePlayerName(text)}
-      placeholder={playerName}
+      placeholder={'CREATE A PLAYER NAME'}
     />
     <TextInput
       style={styles.password}
       onChangeText={text => onChangePassword(text)}
-      placeholder={password}
+      placeholder={'CREATE A PASSWORD'}
+    />
+     <TextInput
+      style={styles.password}
+      onChangeText={text => onChangeLocation(text)}
+      placeholder={'LOCATION'}
     />
      <TouchableOpacity style={styles.signInButton}
-              onPress={() => navigation.navigate('GameArea')}>
+              onPress={() => navigation.navigate('GameChoice')}>
               <Text style={styles.signInButtonText}>SUBMIT</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.backButton}
-              onPress={() => navigation.navigate('CreateProfile')}>
-              <Text style={styles.createprofile_text}>Create Profile</Text>
       </TouchableOpacity>
     
     </View>
@@ -45,6 +48,14 @@ SignInScreen.navigationOptions = {
 };
 
 const styles = StyleSheet.create({
+  proPic_Container:{
+    flex:1,
+    height: 450,
+    backgroundColor:'white',
+    alignItems: 'center', 
+    justifyContent: 'center',
+},
+
   backButton: {
     alignSelf: 'center',
     marginTop: 30,

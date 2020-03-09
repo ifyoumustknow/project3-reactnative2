@@ -7,15 +7,12 @@ export default class LoginScreen extends React.Component {
         name: ""
     };
 
-    continue = () => {
-        this.props.navigation.navigate('WaitRoom', { name: this.state.name });
-    };
+  
 
     render() {
         return (
             <View style={styles.container}>
                 <View style={{ marginTop: 64 }}>
-        
                 </View>
                 <View style={{ marginHorizontal: 32 }}>
                     <Text style={styles.header}>Username</Text>
@@ -28,9 +25,8 @@ export default class LoginScreen extends React.Component {
                         value={this.state.name}
                     />
                     <View style={{ alignItems: "flex-end", marginTop: 64 }}>
-                        <TouchableOpacity style={styles.continue} onPress={this.continue}
-                    
-                        >
+                        <TouchableOpacity style={styles.continue} onPress={()=>this.props.navigation.navigate('WaitRoom')}>
+                        
                             <Ionicons name="md-arrow-round-forward" size={24} color="#FFF" />
                         </TouchableOpacity>
                     </View>
@@ -55,7 +51,6 @@ const styles = StyleSheet.create({
     input: {
         marginTop: 32,
         height: 50,
-        borderWidth: StyleSheet.hairlineWidth,
         borderColor: "#BAB7C3",
         borderRadius: 30,
         paddingHorizontal: 16,

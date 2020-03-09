@@ -10,7 +10,7 @@ export default class WaitRoom extends Component {
       super(props);
       this.state ={
         chatMessage:"",
-        chatMessages:[]
+        chatMessages:[]  
       }
         
     }
@@ -51,7 +51,7 @@ export default class WaitRoom extends Component {
                     </View>
                   
                     <TouchableOpacity style={styles.StartButton}
-              onPress={() => navigation.navigate('GameArea')}>
+              onPress={() => this.props.navigation.navigate('GameArea')}>
               <Text style={styles.StartButtonText}>START GAME</Text>
       </TouchableOpacity>
                     </ScrollView>
@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    paddingTop: 35,
     paddingBottom: 35,
     backgroundColor: '#250A26',
   },
@@ -73,6 +72,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     color: 'white',
     top: 0,
+    alignSelf:"center",
     fontSize: 32,
     zIndex: 99,
     fontFamily: 'FiraSansExtraCondensed-Bold',
@@ -115,12 +115,11 @@ const styles = StyleSheet.create({
   messages:{
     flex:1,
     flexDirection:'row',
-    color:'black',
+    color:'white',
     fontSize: 20,
-    padding:15,
     width:"auto",
-    height:20,
-    backgroundColor: 'white',
+    paddingLeft:30,
+    height:25,
     marginTop:10,
 },
 
@@ -135,6 +134,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     alignSelf:'center',
     paddingLeft:20,
+    marginBottom:20,
   },
 
  

@@ -4,22 +4,33 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import HomeScreen from './screens/HomeScreen';
 import SignInScreen from './screens/SignInScreen';
+import CreateProfile from './screens/CreateProfile';
+import GameChoice from './screens/GameChoice';
 import GameArea from './components/GameArea';
+import Upload from './components/Upload';
+
+import * as Font from 'expo-font'
+
+
 
 
 const navigator = createStackNavigator(
   {
     HomePage: HomeScreen,
     SignIn: SignInScreen,
-    GameArea: GameArea
+    GameArea: GameArea,
+    Upload: Upload,
+    CreateProfile: CreateProfile,
+    GameChoice: GameChoice,
   },
   {
-    initialRouteName: 'SignIn',
+    initialRouteName: 'CreateProfile',
     defaultNavigationOptions: {
       headerShown: false
     }
   }
 );
+
 
 const App = createAppContainer(navigator);
 
@@ -30,8 +41,8 @@ export default () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 35,
     backgroundColor: '#250A26',
   },
 });
+
 
