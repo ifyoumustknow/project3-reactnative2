@@ -6,6 +6,7 @@ import HomeScreen from './screens/HomeScreen';
 import SignInScreen from './screens/SignInScreen';
 import CreateProfile from './screens/CreateProfile';
 import GameChoice from './screens/GameChoice';
+import Single_Name from './screens/Single_Name';
 import GameArea from './components/GameArea';
 import Upload from './components/Upload';
 
@@ -22,9 +23,10 @@ const navigator = createStackNavigator(
     Upload: Upload,
     CreateProfile: CreateProfile,
     GameChoice: GameChoice,
+    Single_Name: Single_Name,
   },
   {
-    initialRouteName: 'CreateProfile',
+    initialRouteName: 'HomePage',
     defaultNavigationOptions: {
       headerShown: false
     }

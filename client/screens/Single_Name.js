@@ -6,66 +6,92 @@ import {
   StatusBar,
   TouchableOpacity,
   Button,
-  Alert
+  Alert,
+  TextInput
 } from 'react-native';
 
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import * as Font from 'expo-font';
 
 
+export default function Single_Name({navigation}) {
 
-export default class App extends Component {
+  const [TeamName, onChangeTeamName] = React.useState('team_name');
+
   
-  render() {
     return (
       <View style={styles.container}>
         <View style={styles.propic}></View>
-        {this._pickImage}
+        {/* {this._pickImage} */}
         <View style={styles.titleContainer}>
         <Text style={styles.Title}>NEW TOURNAMENT</Text>
         </View>
       <View style={styles.floor_container}>
-
+      <Text style={styles.createText}>Create Team Name</Text>
       <TextInput 
       style={styles.playerName}
-      onChangeText={text => onChangePlayerName(text)}
-      placeholder={'CREATE A TEAM NAME'}
-      maxLenth= {3}
+      autoCapitalize={"characters"}
+      placeholder={'ABC'}
+      onChangeText={text => onChangeTeamName(text)}
+      maxLength= {3}
     />
-      <Text style={styles.centerText}>OR</Text>
-
-      <TouchableOpacity style={styles.multiButton}
+   
+   <Text style={styles.centerText}>VS.</Text>
+   <Text
+      style={styles.playerName}
+      maxLength= {3}>CPU</Text>
+      <TouchableOpacity style={styles.singleButton}
               color='white'
               title="Let's Play"
               underlayColor='#fff'
-              onPress={() => this.props.navigation.navigate('GameArea_Multi')}>
-              <Text style={styles.buttonText}>MULTI PLAYER</Text>
+              onPress={() => navigation.navigate('GameArea')}>
+              <Text style={styles.buttonText}>TAP IN</Text>
       </TouchableOpacity>
+    
       </View>
       </View>
     );
   }
-}
+
+
+
 
 const styles = StyleSheet.create({
 
- centerText: {
+  createText: {
+    alignSelf:'center',
+    color:'white',
+    fontSize: 20,
+    paddingTop:20,
+    textAlign:'center',
+    zIndex:9999,
+    textShadowColor: 'black',
+    textShadowOffset: {width: 3, height: 3},
+    textShadowRadius: 2,
+    alignSelf:'center',
+    marginTop:50,
+    marginBottom:50,
+           // fontFamily: 'FiraSansExtraCondensed-Bold',
+
+  },
+
+  centerText: {
     alignSelf:'center',
     justifyContent:'center',
     color:'white',
-    fontSize: 20,
+    fontSize: 50,
     textAlign:'center',
-    paddingLeft : 2,
-    paddingRight : 10,
-    paddingTop : 10,
     zIndex:9999,
        // fontFamily: 'FiraSansExtraCondensed-Bold',
     textShadowColor: 'black',
     textShadowOffset: {width: 3, height: 3},
     textShadowRadius: 2,
     alignSelf:'center',
-    marginTop:50,
+    marginTop:20,
+    marginBottom:20,
   },
+
+
 
   Title: {
     fontWeight: 'bold',
@@ -83,29 +109,9 @@ const styles = StyleSheet.create({
   singleButton: {
     justifyContent:'center',
     alignSelf:'center',
-    width: wp("75%"),
-    height:70,
-    backgroundColor:'#FFB100',
-    borderWidth:5,
-    borderColor: '#250A26',
-    borderRadius: 45,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.8,
-    shadowRadius: 7.1,
-    elevation: 13,
-  },
-
-  multiButton: {
-    justifyContent:'center',
-    alignSelf:'center',
-    marginTop: 50,
-    width: wp("75%"),
-    height:70,
+    width: wp("55%"),
     marginTop:50,
+    height:70,
     backgroundColor:'#FFB100',
     borderWidth:5,
     borderColor: '#250A26',
@@ -131,6 +137,18 @@ const styles = StyleSheet.create({
     // fontFamily: 'FiraSansExtraCondensed-Bold',
 
   },
+
+ 
+
+  playerName: {
+    color: '#250A26',
+    justifyContent:'center',
+    fontSize: 120,
+    fontWeight: 'bold',
+    textAlign:'center',
+    // fontFamily: 'FiraSansExtraCondensed-Bold',
+
+  },
   container: {
     flex: 1,
     paddingTop: 35,
@@ -142,8 +160,6 @@ const styles = StyleSheet.create({
     position:'relative',
     height:hp("90%"),
     top:hp("5%"),
-    justifyContent:'center',
-    alignContent:'center',
     backgroundColor: '#A83131',
     borderRadius: 30,
     overflow: 'hidden',

@@ -30,7 +30,7 @@ export default class App extends Component {
               color='white'
               title="Let's Play"
               underlayColor='#fff'
-              onPress={() => this.props.navigation.navigate('GameArea')}>
+              onPress={() => this.props.navigation.navigate('Single_Name')}>
               <Text style={styles.buttonText}>SINGLE PLAYER</Text>
       </TouchableOpacity>
       <Text style={styles.centerText}>OR</Text>
