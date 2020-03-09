@@ -58,7 +58,7 @@ export default class ImagePickerExample extends React.Component {
 
 const styles = StyleSheet.create({
 proPic_Container:{
-    height: 250,
+    height: 200,
     alignItems: 'center', 
     justifyContent: 'center',
 },

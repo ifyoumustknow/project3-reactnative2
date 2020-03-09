@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     paddingLeft : 10,
     paddingRight : 10,
     paddingTop : 5,
-    fontFamily: 'FiraSansExtraCondensed-Bold',
+    // fontFamily: 'FiraSansExtraCondensed-Bold',
     textShadowColor: 'black',
     textShadowOffset: {width: 3, height: 3},
     textShadowRadius: 2,

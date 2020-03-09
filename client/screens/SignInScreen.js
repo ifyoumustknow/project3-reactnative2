@@ -27,7 +27,7 @@ export default function SignInScreen({navigation}) {
       placeholder={password}
     />
      <TouchableOpacity style={styles.signInButton}
-              onPress={() => navigation.navigate('GameArea')}>
+              onPress={() => navigation.navigate('GameChoice')}>
               <Text style={styles.signInButtonText}>SUBMIT</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.backButton}
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     borderRadius: 25,
     marginTop: 20,
-    fontFamily: 'FiraSansExtraCondensed-Bold',
+    // fontFamily: 'FiraSansExtraCondensed-Bold',
 
   },
 
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     borderRadius: 25,
     marginTop: 30,
-    fontFamily: 'FiraSansExtraCondensed-Bold',
+    // fontFamily: 'FiraSansExtraCondensed-Bold',
 
   },
   Title: {

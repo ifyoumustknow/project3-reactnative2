@@ -173,7 +173,7 @@ export default class App extends Component {
               <View style={styles.fullScreen}>
                 <Text style={styles.gameOverText}>GAME OVER</Text>
                 <TouchableOpacity style={styles.backButton}
-                onPress={() => this.props.navigation.navigate('HomePage')}>
+                onPress={() => this.props.navigation.navigate('GameChoice')}>
                 <Text style={styles.gameOverSubText}>Tap Out</Text>
                 </TouchableOpacity>
                 <Text style={styles.TapOutText}
@@ -191,7 +191,7 @@ export default class App extends Component {
            <Text style={styles.gameOverSubText}>Tap Out</Text>
            </TouchableOpacity>
            <Text style={styles.TapOutText}
-            onPress={this.reset}>Rematch</Text>
+            onPress={this.reset}>Challenge</Text>
          </View>
           </TouchableOpacity>
           )}
@@ -206,15 +206,15 @@ export default class App extends Component {
           )}
         </View>
         <Text style={styles.timer}>90</Text>
-        <Text style={styles.team_text_left}>P1</Text>
-        <Text style={styles.team_text_right}>P2</Text>
-        <Text style={styles.team_container_text}>P2</Text>
+        <Text style={styles.team_text_left}>YOU</Text>
+        <Text style={styles.team_text_right}>CPU</Text>
+        <Text style={styles.team_container_text}>CPU</Text>
       
         <View style={styles.bird_spot} />
         <View style={styles.stroke_bottom} />
         <View style={styles.stroke_top} />
         <View style={styles.team_container_bottom} />
-        <Text style={styles.team_container_text_bot}>P1</Text>
+        <Text style={styles.team_container_text_bot}>YOU</Text>
       </View>
       </View>
     );
@@ -280,7 +280,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: 'white',
     zIndex: 9999,
-    fontFamily: 'FiraSansExtraCondensed-Bold',
+    // fontFamily: 'FiraSansExtraCondensed-Bold',
   },
 
   team_text_left: {
@@ -292,7 +292,7 @@ const styles = StyleSheet.create({
     fontSize: 23,
     textAlign: 'center',
     zIndex: 9999,
-    fontFamily: 'FiraSansExtraCondensed-Medium',
+    // fontFamily: 'FiraSansExtraCondensed-Medium',
   },
 
   team_text_right: {
@@ -304,7 +304,7 @@ const styles = StyleSheet.create({
     fontSize: 23,
     textAlign: 'center',
     zIndex: 9999,
-    fontFamily: 'FiraSansExtraCondensed-Medium',
+    // fontFamily: 'FiraSansExtraCondensed-Medium',
   },
 
   header_container: {
@@ -341,7 +341,7 @@ const styles = StyleSheet.create({
     left:wp("45.6%"),
     textAlign: 'center',
     zIndex: 999,
-    fontFamily: 'FiraSansExtraCondensed-Bold',
+    // fontFamily: 'FiraSansExtraCondensed-Bold',
   },
 
    floor_container: {
@@ -384,7 +384,7 @@ const styles = StyleSheet.create({
     fontSize: 44,
     textAlign: 'center',
     zIndex: 9999,
-    fontFamily: 'FiraSansExtraCondensed-Bold',
+    // fontFamily: 'FiraSansExtraCondensed-Bold',
   },
 
   scores_right_container: {
@@ -405,11 +405,12 @@ const styles = StyleSheet.create({
     fontSize: 44,
     textAlign: 'center',
     zIndex: 9999,
-    fontFamily: 'FiraSansExtraCondensed-Bold',
+    // fontFamily: 'FiraSansExtraCondensed-Bold',
   },
 
   team_container_top: {
     position:'absolute',
+    justifyContent:'center',
     alignSelf:'center',
     top:hp("1%"),
     right:hp("17.8%"),
@@ -458,7 +459,7 @@ const styles = StyleSheet.create({
     top: 20,
     fontSize: 55,
     zIndex: 99,
-    fontFamily: 'FiraSansExtraCondensed-Bold',
+    // fontFamily: 'FiraSansExtraCondensed-Bold',
     textShadowColor: 'black',
     textShadowOffset: {width: 3, height: 3},
     textShadowRadius: 2,
@@ -470,7 +471,7 @@ const styles = StyleSheet.create({
     top: 0,
     fontSize: 48,
     zIndex: 99,
-    fontFamily: 'FiraSansExtraCondensed-Bold',
+    // fontFamily: 'FiraSansExtraCondensed-Bold',
     textShadowColor: 'black',
     textShadowOffset: {width: 3, height: 3},
     textShadowRadius: 2,
@@ -481,7 +482,7 @@ const styles = StyleSheet.create({
     top: 0,
     fontSize: 24,
     zIndex: 99,
-    fontFamily: 'FiraSansExtraCondensed-Bold',
+    // fontFamily: 'FiraSansExtraCondensed-Bold',
     textShadowColor: 'black',
     textShadowOffset: {width: 3, height: 3},
     textShadowRadius: 2,
@@ -493,7 +494,7 @@ const styles = StyleSheet.create({
     marginTop:200,
     fontSize: 34,
     zIndex: 99,
-    fontFamily: 'FiraSansExtraCondensed-Bold',
+    // fontFamily: 'FiraSansExtraCondensed-Bold',
     textShadowColor: 'black',
     textShadowOffset: {width: 3, height: 3},
     textShadowRadius: 2,
@@ -506,12 +507,13 @@ const styles = StyleSheet.create({
     fontSize: 40,
     color: 'white',
     zIndex: 999,
-    fontFamily: 'FiraSansExtraCondensed-Bold',
+    // fontFamily: 'FiraSansExtraCondensed-Bold',
   },
 
   team_container_bottom: {
     position:'absolute',
     alignSelf:'center',
+    justifyContent:'center',
     position:'relative',
     bottom:hp("14%"),
     width: 180,

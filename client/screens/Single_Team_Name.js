@@ -26,13 +26,12 @@ export default class App extends Component {
         </View>
       <View style={styles.floor_container}>
 
-      <TouchableOpacity style={styles.singleButton}
-              color='white'
-              title="Let's Play"
-              underlayColor='#fff'
-              onPress={() => this.props.navigation.navigate('GameArea')}>
-              <Text style={styles.buttonText}>SINGLE PLAYER</Text>
-      </TouchableOpacity>
+      <TextInput 
+      style={styles.playerName}
+      onChangeText={text => onChangePlayerName(text)}
+      placeholder={'CREATE A TEAM NAME'}
+      maxLenth= {3}
+    />
       <Text style={styles.centerText}>OR</Text>
 
       <TouchableOpacity style={styles.multiButton}

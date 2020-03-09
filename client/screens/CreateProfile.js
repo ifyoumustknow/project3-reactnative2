@@ -4,12 +4,15 @@ import { getOrientationAsync } from 'expo/build/ScreenOrientation/ScreenOrientat
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Upload from '../components/Upload';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+
 
 export default function SignInScreen({navigation}) {
   
 
   const [playerName, onChangePlayerName] = React.useState('PLAYER NAME');
   const [password, onChangePassword] = React.useState('PASSWORD');
+  const [location, onChangeLocation] = React.useState('LOCATION');
 
 
   return (
@@ -49,8 +52,7 @@ SignInScreen.navigationOptions = {
 
 const styles = StyleSheet.create({
   proPic_Container:{
-    flex:1,
-    height: 450,
+    height: 250,
     backgroundColor:'white',
     alignItems: 'center', 
     justifyContent: 'center',
@@ -96,14 +98,13 @@ const styles = StyleSheet.create({
     textAlign:'center',
     paddingLeft : 2,
     paddingRight : 10,
-    paddingTop : 10,
     zIndex:9999,
   },
 
   container: {
       flex:1,
       justifyContent:'center',
-      height: 900,
+      height:hp("70%"),
       backgroundColor: '#250A26',
   },
 
@@ -115,7 +116,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     borderRadius: 25,
     marginTop: 20,
-    fontFamily: 'FiraSansExtraCondensed-Bold',
+    // fontFamily: 'FiraSansExtraCondensed-Bold',
 
   },
 
@@ -127,7 +128,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     borderRadius: 25,
     marginTop: 30,
-    fontFamily: 'FiraSansExtraCondensed-Bold',
+    // fontFamily: 'FiraSansExtraCondensed-Bold',
 
   },
   Title: {
